@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="renderer" content="webkit">
+    <title>用户管理</title>
+    <link rel="stylesheet" href="../static/css/pintuer.css">
+    <link rel="stylesheet" href="../static/css/admin.css">
+    <script src="../static/script/jquery.js"></script>
+    <script src="../static/script/pintuer.js"></script>
+    <style>
+        table {
+            position: absolute;
+            left: 200px;
+            top: 140px;
+            border-collapse: collapse;
+            border-spacing: 0;
+            border: 1px solid #c0c0c0;
+        }
+
+        th, td {
+            border: 1px solid #d0d0d0;
+            color: #404060;
+            padding: 15px 70px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #09c;
+            font: bold 16px "微软雅黑";
+            color: #fff;
+        }
+
+        td {
+            font: 14px "微软雅黑";
+            width: 300px;
+        }
+
+        tbody tr {
+            background-color: #f0f0f0;
+        }
+
+        tbody tr:hover {
+            cursor: pointer;
+            background-color: #fafafa;
+        }
+    </style>
+</head>
+<body>
+<div class="panel admin-panel">
+    <div class="panel-head">
+        <strong>
+            <span class="icon-pencil-square-o">
+            </span> 显示用户信息
+        </strong>
+
+    </div>
+    <table id="TbData">
+
+    </table>
+</div>
+<script>
+    $.getJSON('/user_list', function (result) {
+        var data = result;
+        $(function () {
+            var html = "";
+            html += "<tr>";
+            html += "<td>" + "ID" + "</td>"
+            html += "<td>" + "用户账号" + "</td>"
+            html += "<td>" + "用户昵称" + "</td>"
+            html += "</tr>";
+            for (var i = 0; i < data.length; i++) {
+                html += "<tr>";
+                html += "<td>" + data[i].id + "</td>"
+                html += "<td>" + data[i].phone + "</td>"
+                html += "<td>" + data[i].name + "</td>"
+                html += "</tr>";
+            }
+            $("#TbData").html(html);
+        });
+    })
+</script>
+</body>
+</html>

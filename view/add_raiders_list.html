@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="renderer" content="webkit">
+    <title>添加攻略信息</title>
+    <link rel="stylesheet" href="../static/css/pintuer.css">
+    <link rel="stylesheet" href="../static/css/admin.css">
+    <script src="../static/script/jquery.js"></script>
+    <script src="../static/script/pintuer.js"></script>
+</head>
+<body>
+<div class="panel admin-panel">
+    <div class="panel-head"><strong><span class="icon-pencil-square-o"></span> 添加攻略信息</strong></div>
+    <div class="body-content">
+        <form method="post" class="form-x">
+            <div class="form-group">
+                <div class="label">
+                    <label>地点：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input" value="" id="title"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>简述：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input" value="" id="description"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>详情：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input" value="" id="details_description"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>图片：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input" value="" id="background"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>详情一：</label>
+                </div>
+                <div class="field">
+                    <textarea class="input" style="height:120px" id="text1"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>图片一：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input" value="" id="img1"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>详情二：</label>
+                </div>
+                <div class="field">
+                    <textarea class="input" style="height:120px" id="text2"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>图片二：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input" value="" id="img2"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>详情三：</label>
+                </div>
+                <div class="field">
+                    <textarea class="input" style="height:120px" id="text3"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>图片三：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input" value="" id="img3"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label">
+                    <label></label>
+                </div>
+                <div class="field">
+                    <button class="button bg-main icon-check-square-o" onclick="add1()" target="_parent"> 提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    function add1() {
+        var title = document.getElementById("title").value;
+        var description = document.getElementById("description").value;
+        var details_description = document.getElementById("details_description").value;
+        var background = document.getElementById("background").value;
+        var text1 = document.getElementById("text1").value;
+        var img1 = document.getElementById("img1").value;
+        var text2 = document.getElementById("text2").value;
+        var img2 = document.getElementById("img2").value;
+        var text3 = document.getElementById("text3").value;
+        var img3 = document.getElementById("img3").value;
+        $.getJSON('/add_raiders_list',
+                {
+                    title: title,
+                    description: description,
+                    details_description: details_description,
+                    background: background,
+                    text1: text1,
+                    img1: img1,
+                    text2: text2,
+                    img2: img2,
+                    text3: text3,
+                    img3: img3
+                }, function (err, result) {
+                    parent.location.href = "index.html";
+                });
+    }
+</script>
+</body>
+</html>

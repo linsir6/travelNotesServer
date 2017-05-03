@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Home</title>
+<link href="../static/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+<meta content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<div class="login">
+	<h2>Acced Form</h2>
+	<div class="login-top">
+		<h1>LOGIN FORM</h1>
+		<form>
+			<input type="text"  id="username"   value="User Id" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'User Id';}">
+			<input type="password" id="password" value="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'password';}">
+	    </form>
+	    <div class="forgot">
+	    	<input type="submit" value="Login" onclick="submit1()">
+	    </div>
+	</div>
+</div>
+<script>
+	var username = document.getElementById("username");
+	var password = document.getElementById("password");
+	function submit1() {
+		if (username.value == "admin" && password.value == "admin") {
+			window.location.href='index.html';
+		}
+		else{
+			alert("用户名或密码不正确！")
+		}
+	}
+</script>
+</body>
+</html>

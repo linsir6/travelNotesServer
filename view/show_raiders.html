@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="renderer" content="webkit">
+    <title>显示攻略信息</title>
+    <link rel="stylesheet" href="../static/css/pintuer.css">
+    <link rel="stylesheet" href="../static/css/admin.css">
+    <script src="../static/script/jquery.js"></script>
+    <script src="../static/script/pintuer.js"></script>
+    <script src="../static/script/vue.js"></script>
+    <style>
+        table {
+            position: absolute;
+            left: 6px;
+            top: 140px;
+            border-collapse: collapse;
+            border-spacing: 0;
+            border: 1px solid #c0c0c0;
+            table-layout: fixed;
+            width: 100%;
+            overflow: scroll
+        }
+
+        th, td {
+            border: 1px solid #d0d0d0;
+            color: #404060;
+            padding: 7px 7px;
+        }
+
+        th {
+            /*background-color: #09c;*/
+            font: bold 16px "微软雅黑";
+            color: black;
+            text-align: center;
+        }
+
+        td {
+            height: 50px;
+            width: 130px;
+            font: 14px "微软雅黑";
+            overflow: hidden;
+            text-overflow: ellipsis;
+            word-break: keep-all;
+            white-space: nowrap; /* 不换行 */
+        }
+
+        tbody tr {
+            background-color: #f0f0f0;
+        }
+
+        tbody tr:hover {
+            cursor: pointer;
+            background-color: #fafafa;
+        }
+
+        .user {
+            position: absolute;
+            top: 70px;
+            right: 100px;
+        }
+
+        #app {
+            font-size: 20px;
+            margin: 50px;
+            border: 1px solid #f1f1f1;
+            padding: 30px;
+            border-radius: 7px;
+            background-color: #f1f1f1;
+        }
+
+        .title {
+            font: bold 40px "微软雅黑";
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="panel admin-panel" id="data">
+    <div class="panel-head">
+        <strong>
+            <span class="icon-pencil-square-o">
+
+            </span> 显示攻略信息
+        </strong>
+        <form class="user">
+            <input type="text" id="userId" placeholder="输入地点，展示详情"
+                   style="height: 35px;width: 300px;padding:0;margin-right: 10px;">
+            <button type="button" onclick="get_data()" style="height:34px ;width: 50px;">搜索</button>
+        </form>
+    </div>
+    <div style="height: 100%">
+        <table id="TbData">
+
+        </table>
+    </div>
+    <div id="text">
+    </div>
+
+</div>
+<div id="app" style="display: none">
+    <p class="title">{{title}}-详情展示</p>
+    地点：
+    <br>
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    {{title}}
+    <br>
+    简述：
+    <br>
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    {{description}}
+    <br>
+    <br>
+    详情：
+    <br>
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    {{details_description}}
+    <br>
+    <br>
+    图片:
+    <br>
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    {{background}}
+    <br>
+    <br>
+    详情一:
+    <br>
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    {{text1}}
+    <br>
+    <br>
+    图片:
+    <br>
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    {{img1}}
+    <br>
+    <br>
+    详情二:
+    <br>
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    {{text2}}
+    <br>
+    <br>
+    图片:
+    <br>
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    {{img2}}
+    <br>
+    <br>
+    详情三:
+    <br>
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    {{text3}}
+    <br>
+    <br>
+    图片:
+    <br>
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    {{img3}}
+</div>
+<script>
+    $.getJSON('/get_all_raiders', function (result) {
+        var data = result;
+        $(function () {
+            var html = "";
+            html += "<tr>";
+            html += "<td>" + "地点 " + "</td>"
+            html += "<td>" + "简述" + "</td>"
+            html += "<td>" + "详情" + "</td>"
+            html += "<td>" + "图片" + "</td>"
+            html += "<td>" + "详情一" + "</td>"
+            html += "<td>" + "图片" + "</td>"
+            html += "<td>" + "详情二" + "</td>"
+            html += "<td>" + "图片" + "</td>"
+            html += "<td>" + "详情三" + "</td>"
+            html += "<td>" + "图片" + "</td>"
+            html += "</tr>";
+            for (var i = 0; i < data.length; i++) {
+                html += "<tr>";
+                html += "<td>" + data[i].title + "</td>"
+                html += "<td>" + data[i].description + "</td>"
+                html += "<td>" + data[i].details_description + "</td>"
+                html += "<td>" + data[i].background + "</td>"
+                html += "<td>" + data[i].text1 + "</td>"
+                html += "<td>" + data[i].img1 + "</td>"
+                html += "<td>" + data[i].text2 + "</td>"
+                html += "<td>" + data[i].img2 + "</td>"
+                html += "<td>" + data[i].text3 + "</td>"
+                html += "<td>" + data[i].img3 + "</td>"
+                html += "</tr>";
+            }
+            $("#TbData").html(html);
+        });
+
+    });
+    function get_data() {
+        var place = document.getElementById("userId").value;
+        $.getJSON('/search_raiders',
+                {
+                    place: place
+                },
+                function (result) {
+                    if (result[0]) {
+                        var data = result;
+                        $("#data").html("");
+                        var app = new Vue({
+                            el: '#app',
+                            data: {
+                                title: data[0].title,
+                                description: data[0].description,
+                                details_description: data[0].details_description,
+                                background: data[0].background,
+                                text1: data[0].text1,
+                                img1: data[0].img1,
+                                text2: data[0].text2,
+                                img2: data[0].img2,
+                                text3: data[0].text3,
+                                img3: data[0].img3
+                            }
+                        });
+                        $("#app").css("display", "block")
+                    } else {
+                        alert("暂无此地点")
+                    }
+
+                });
+    }
+</script>
+</body>
+</html>
